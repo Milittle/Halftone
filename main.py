@@ -40,9 +40,10 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         self.imgName, self.imgType= QFileDialog.getOpenFileName(self,
                                     "打开图片",
                                     ".",
-                                    " *.jpg;;*.png;;*.jpeg;;*.bmp;;All Files (*)")
+                                    "*.png;;*.jpg;;*.jpeg;;*.bmp")
 
         print('filename{}'.format(self.imgName))
+
         #利用qlabel显示图片
         if self.imgName != '':
             self.png = QtGui.QPixmap(self.imgName).scaled(self.image_source.width(), self.image_source.height())
@@ -80,7 +81,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 else:
                     im2.putpixel((m, n), 0)
 
-        im2.save('Bayer.png')
+        im2.save('Bayer.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -114,7 +115,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                     im2.putpixel((m, n), 1)
                 else:
                     im2.putpixel((m, n), 0)
-        im2.save('Halftone.png')
+        im2.save('Halftone.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -148,7 +149,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                     im2.putpixel((m, n), 1)
                 else:
                     im2.putpixel((m, n), 0)
-        im2.save('Screw.png')
+        im2.save('Screw.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -182,7 +183,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                     im2.putpixel((m, n), 1)
                 else:
                     im2.putpixel((m, n), 0)
-        im2.save('CoarseFatting.png')
+        im2.save('CoarseFatting.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -207,7 +208,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                     im2.putpixel((m, n), 1)
                 else:
                     im2.putpixel((m, n), 0)
-        im2.save('global_dou.png')
+        im2.save('global_dou.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -233,7 +234,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                     im2.putpixel((m, n), 1)
                 else:
                     im2.putpixel((m, n), 0)
-        im2.save('local_dou.png')
+        im2.save('local_dou.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -264,7 +265,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 pix[(m + 1) * im2.size[1] + n] += nError * 5 / 16.0
                 pix[(m + 1) * im2.size[1] + n + 1] += nError * 1 / 16.0
 
-        im2.save('Floyd_Steinberg.png')
+        im2.save('Floyd_Steinberg.jpg')
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -307,7 +308,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                     pix[(m + 1) * im2.size[1] + n + 1] += nError * 3 / 16.0
                     pix[(m + 1) * im2.size[1] + n] += nError * 5 / 16.0
                     pix[(m + 1) * im2.size[1] + n - 1] += nError * 1 / 16.0
-        im2.save("Floyd_Steinberg1.bmp")
+        im2.save("Floyd_Steinberg1.jpg")
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -341,7 +342,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 pix[(m + 1) * im2.size[1] + n + 1] += nError * 4 / 32.0
                 pix[(m + 1) * im2.size[1] + n + 2] += nError * 2 / 32.0
 
-        im2.save("Burkes.bmp")
+        im2.save("Burkes.jpg")
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -379,7 +380,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 pix[(m + 2) * im2.size[1] + n + 1] += nError * 3 / 48.0
                 pix[(m + 2) * im2.size[1] + n + 2] += nError * 1 / 48.0
 
-        im2.save("Jarris_Judice_Ninke.bmp")
+        im2.save("Jarris_Judice_Ninke.jpg")
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)
@@ -418,7 +419,7 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 pix[(m + 2) * im2.size[1] + n + 1] += nError * 2 / 42.0
                 pix[(m + 2) * im2.size[1] + n + 2] += nError * 1 / 42.0
 
-        im2.save("Stucki.bmp")
+        im2.save("Stucki.jpg")
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
         self.image_change.setPixmap(self.img_change)

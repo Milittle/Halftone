@@ -1,6 +1,2 @@
 .idea/*
 __pycache__
-*.jpg
-*.bmp
-*.png
-!test.jpg
