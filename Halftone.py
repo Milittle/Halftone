@@ -130,7 +130,7 @@ class Ui_MainWindow(object):
         self.menu_xuanze.setTitle(_translate("MainWindow", "有序抖动算法"))
         self.menu_2.setTitle(_translate("MainWindow", "无序抖动算法"))
         self.menu_3.setTitle(_translate("MainWindow", "误差扩散算法"))
-        self.actionOpen.setText(_translate("MainWindow", "Open"))
+        self.actionOpen.setText(_translate("MainWindow", "打开图片"))
         self.actionBayer.setText(_translate("MainWindow", "Bayer抖动算法"))
         self.actionHalftone.setText(_translate("MainWindow", "Halftone抖动算法"))
         self.actionScrew.setText(_translate("MainWindow", "Screw抖动算法"))

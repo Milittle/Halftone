@@ -70,9 +70,9 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 15, 47, 7, 39, 13, 45, 5, 37,
                 63, 31, 55, 23, 61, 29, 53, 21]
 
-        for m in range(im2.size[1]):
+        for m in range(im2.size[0]):
             k = m % K
-            for n in range(im2.size[0]):
+            for n in range(im2.size[1]):
                 l = n % L
                 pix = int(im.getpixel((m / time, n / time)) / 255.0 * N + 0.5)
                 if pix > Mask[k * L + l]:
@@ -105,9 +105,9 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 41, 57, 63, 51, 15, 7, 1, 21,
                 33, 55, 47, 39, 25, 17, 9, 31]
 
-        for m in range(im2.size[1]):
+        for m in range(im2.size[0]):
             k = m % K
-            for n in range(im2.size[0]):
+            for n in range(im2.size[1]):
                 l = n % L
                 pix = int(im.getpixel((m / time, n / time)) / 255.0 * N + 0.5)
                 if pix > Mask[k * L + l]:
@@ -139,9 +139,9 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 59, 50, 36, 21, 20, 33, 47, 56,
                 63, 58, 49, 35, 34, 48, 57, 62]
 
-        for m in range(im2.size[1]):
+        for m in range(im2.size[0]):
             k = m % K
-            for n in range(im2.size[0]):
+            for n in range(im2.size[1]):
                 l = n % L
                 pix = int(im.getpixel((m / time, n / time)) / 255.0 * N + 0.5)
                 if pix > Mask[k * L + l]:
@@ -173,9 +173,9 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
                 10, 24, 32, 40, 42, 34, 30, 8,
                 2, 12, 54, 60, 51, 44, 22, 0]
 
-        for m in range(im2.size[1]):
+        for m in range(im2.size[0]):
             k = m % K
-            for n in range(im2.size[0]):
+            for n in range(im2.size[1]):
                 l = n % L
                 pix = int(im.getpixel((m / time, n / time)) / 255.0 * N + 0.5)
                 if pix > Mask[k * L + l]:
@@ -198,9 +198,9 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im = Image.open(self.imgName).convert('L')
         im2 = Image.new("1", (im.size[0] * time, im.size[1] * time))
 
-        for m in range(im2.size[1]):
+        for m in range(im2.size[0]):
             k = m % K
-            for n in range(im2.size[0]):
+            for n in range(im2.size[1]):
                 l = n % L
                 pix = int(im.getpixel((m / time, n / time)) / 255.0 * N + 0.5)
                 if pix > random.randint(0, 64):
@@ -224,10 +224,9 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         Mask = [0] * im.size[0] * time * im.size[1] * time
         for i in range(63):
             Mask[i] = random.randint(0, 64)
-
-        for m in range(im2.size[1]):
+        for m in range(im2.size[0]):
             k = m % K
-            for n in range(im2.size[0]):
+            for n in range(im2.size[1]):
                 l = n % L
                 pix = int(im.getpixel((m / time, n / time)) / 255.0 * N + 0.5)
                 if pix > Mask[k * L + l]:
@@ -248,22 +247,22 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im2 = Image.new("1", (im.size[0] * time, im.size[1] * time))
         pix = [0.0] * im2.size[0] * im2.size[1]
 
-        for m in range(im2.size[1]):
-            for n in range(im2.size[0]):
-                pix[m * im2.size[0] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
+        for m in range(im2.size[0]):
+            for n in range(im2.size[1]):
+                pix[m * im2.size[1] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
 
-        for m in range(im2.size[1] - 1):
-            for n in range(1, im2.size[0] - 1):
-                if pix[m * im2.size[0] + n] <= 72:
-                    nError = pix[m * im2.size[0] + n]
+        for m in range(im2.size[0] - 1):
+            for n in range(1, im2.size[1] - 1):
+                if pix[m * im2.size[1] + n] <= 72:
+                    nError = pix[m * im2.size[1] + n]
                     im2.putpixel((m, n), 0)
                 else:
-                    nError = pix[m * im2.size[0] + n] - N
+                    nError = pix[m * im2.size[1] + n] - N
                     im2.putpixel((m, n), 1)
-                pix[m * im2.size[0] + n + 1] += nError * 7 / 16.0
-                pix[(m + 1) * im2.size[0] + n - 1] += nError * 3 / 16.0
-                pix[(m + 1) * im2.size[0] + n] += nError * 5 / 16.0
-                pix[(m + 1) * im2.size[0] + n + 1] += nError * 1 / 16.0
+                pix[m * im2.size[1] + n + 1] += nError * 7 / 16.0
+                pix[(m + 1) * im2.size[1] + n - 1] += nError * 3 / 16.0
+                pix[(m + 1) * im2.size[1] + n] += nError * 5 / 16.0
+                pix[(m + 1) * im2.size[1] + n + 1] += nError * 1 / 16.0
 
         im2.save('Floyd_Steinberg.png')
         qim = ImageQt(im2)
@@ -279,35 +278,35 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im2 = Image.new("1", (im.size[0] * time, im.size[1] * time))
         pix = [0.0] * im2.size[0] * im2.size[1]
 
-        for m in range(im2.size[1]):
-            for n in range(im2.size[0]):
-                pix[m * im2.size[0] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
+        for m in range(im2.size[0]):
+            for n in range(im2.size[1]):
+                pix[m * im2.size[1] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
 
-        for m in range(im2.size[1] - 1):
+        for m in range(im2.size[0] - 1):
             if m % 2 == 1:
-                for n in range(1, im2.size[0] - 1):
-                    if pix[m * im2.size[0] + n] <= 72:
+                for n in range(1, im2.size[1] - 1):
+                    if pix[m * im2.size[1] + n] <= 72:
                         nError = pix[m * im2.size[0] + n]
                         im2.putpixel((m, n), 0)
                     else:
-                        nError = pix[m * im2.size[0] + n] - N
+                        nError = pix[m * im2.size[1] + n] - N
                         im2.putpixel((m, n), 1)
-                    pix[m * im2.size[0] + n + 1] += nError * 7 / 16.0
-                    pix[(m + 1) * im2.size[0] + n - 1] += nError * 3 / 16.0
-                    pix[(m + 1) * im2.size[0] + n] += nError * 5 / 16.0
-                    pix[(m + 1) * im2.size[0] + n + 1] += nError * 1 / 16.0
+                    pix[m * im2.size[1] + n + 1] += nError * 7 / 16.0
+                    pix[(m + 1) * im2.size[1] + n - 1] += nError * 3 / 16.0
+                    pix[(m + 1) * im2.size[1] + n] += nError * 5 / 16.0
+                    pix[(m + 1) * im2.size[1] + n + 1] += nError * 1 / 16.0
             else:
-                for n in range(im2.size[0] - 2, 0, -1):
-                    if pix[m * im2.size[0] + n] <= 72:
+                for n in range(im2.size[1] - 2, 0, -1):
+                    if pix[m * im2.size[1] + n] <= 72:
                         nError = pix[m * im2.size[0] + n]
                         im2.putpixel((m, n), 0)
                     else:
                         nError = pix[m * im2.size[0] + n] - N
                         im2.putpixel((m, n), 1)
-                    pix[m * im2.size[0] + n - 1] += nError * 7 / 16.0
-                    pix[(m + 1) * im2.size[0] + n + 1] += nError * 3 / 16.0
-                    pix[(m + 1) * im2.size[0] + n] += nError * 5 / 16.0
-                    pix[(m + 1) * im2.size[0] + n - 1] += nError * 1 / 16.0
+                    pix[m * im2.size[1] + n - 1] += nError * 7 / 16.0
+                    pix[(m + 1) * im2.size[1] + n + 1] += nError * 3 / 16.0
+                    pix[(m + 1) * im2.size[1] + n] += nError * 5 / 16.0
+                    pix[(m + 1) * im2.size[1] + n - 1] += nError * 1 / 16.0
         im2.save("Floyd_Steinberg1.bmp")
         qim = ImageQt(im2)
         self.img_change = QtGui.QPixmap.fromImage(qim).scaled(self.image_change.width(), self.image_change.height())
@@ -322,25 +321,25 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im2 = Image.new("1", (im.size[0] * time, im.size[1] * time))
         pix = [0.0] * im2.size[0] * im2.size[1]
 
-        for m in range(im2.size[1]):
-            for n in range(im2.size[0]):
-                pix[m * im2.size[0] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
+        for m in range(im2.size[0]):
+            for n in range(im2.size[1]):
+                pix[m * im2.size[1] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
 
-        for m in range(1, im2.size[1] - 1):
-            for n in range(2, im2.size[0] - 2):
-                if pix[m * im2.size[0] + n] <= 72:
-                    nError = pix[m * im2.size[0] + n]
+        for m in range(1, im2.size[0] - 1):
+            for n in range(2, im2.size[1] - 2):
+                if pix[m * im2.size[1] + n] <= 72:
+                    nError = pix[m * im2.size[1] + n]
                     im2.putpixel((m, n), 0)
                 else:
-                    nError = pix[m * im2.size[0] + n] - N
+                    nError = pix[m * im2.size[1] + n] - N
                     im2.putpixel((m, n), 1)
-                pix[m * im2.size[0] + n + 1] += nError * 8 / 32.0
-                pix[m * im2.size[0] + n + 2] += nError * 4 / 32.0
-                pix[(m + 1) * im2.size[0] + n - 2] += nError * 2 / 32.0
-                pix[(m + 1) * im2.size[0] + n - 1] += nError * 4 / 32.0
-                pix[(m + 1) * im2.size[0] + n] += nError * 8 / 32.0
-                pix[(m + 1) * im2.size[0] + n + 1] += nError * 4 / 32.0
-                pix[(m + 1) * im2.size[0] + n + 2] += nError * 2 / 32.0
+                pix[m * im2.size[1] + n + 1] += nError * 8 / 32.0
+                pix[m * im2.size[1] + n + 2] += nError * 4 / 32.0
+                pix[(m + 1) * im2.size[1] + n - 2] += nError * 2 / 32.0
+                pix[(m + 1) * im2.size[1] + n - 1] += nError * 4 / 32.0
+                pix[(m + 1) * im2.size[1] + n] += nError * 8 / 32.0
+                pix[(m + 1) * im2.size[1] + n + 1] += nError * 4 / 32.0
+                pix[(m + 1) * im2.size[1] + n + 2] += nError * 2 / 32.0
 
         im2.save("Burkes.bmp")
         qim = ImageQt(im2)
@@ -355,30 +354,30 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im2 = Image.new("1", (im.size[0] * time, im.size[1] * time))
         pix = [0.0] * im2.size[0] * im2.size[1]
 
-        for m in range(im2.size[1]):
-            for n in range(im2.size[0]):
-                pix[m * im2.size[0] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
+        for m in range(im2.size[0]):
+            for n in range(im2.size[1]):
+                pix[m * im2.size[1] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
 
-        for m in range(im2.size[1] - 2):
-            for n in range(2, im2.size[0] - 2):
-                if pix[m * im2.size[0] + n] <= 72:
-                    nError = pix[m * im2.size[0] + n]
+        for m in range(im2.size[0] - 2):
+            for n in range(2, im2.size[1] - 2):
+                if pix[m * im2.size[1] + n] <= 72:
+                    nError = pix[m * im2.size[1] + n]
                     im2.putpixel((m, n), 0)
                 else:
-                    nError = pix[m * im2.size[0] + n] - N
+                    nError = pix[m * im2.size[1] + n] - N
                     im2.putpixel((m, n), 1)
-                pix[m * im2.size[0] + n + 1] += nError * 7 / 48.0
-                pix[m * im2.size[0] + n + 2] += nError * 5 / 48.0
-                pix[(m + 1) * im2.size[0] + n - 2] += nError * 3 / 48.0
-                pix[(m + 1) * im2.size[0] + n - 1] += nError * 5 / 48.0
-                pix[(m + 1) * im2.size[0] + n] += nError * 7 / 48.0
-                pix[(m + 1) * im2.size[0] + n + 1] += nError * 5 / 48.0
-                pix[(m + 1) * im2.size[0] + n + 2] += nError * 3 / 48.0
-                pix[(m + 2) * im2.size[0] + n - 2] += nError * 1 / 48.0
-                pix[(m + 2) * im2.size[0] + n - 1] += nError * 3 / 48.0
-                pix[(m + 2) * im2.size[0] + n] += nError * 5 / 48.0
-                pix[(m + 2) * im2.size[0] + n + 1] += nError * 3 / 48.0
-                pix[(m + 2) * im2.size[0] + n + 2] += nError * 1 / 48.0
+                pix[m * im2.size[1] + n + 1] += nError * 7 / 48.0
+                pix[m * im2.size[1] + n + 2] += nError * 5 / 48.0
+                pix[(m + 1) * im2.size[1] + n - 2] += nError * 3 / 48.0
+                pix[(m + 1) * im2.size[1] + n - 1] += nError * 5 / 48.0
+                pix[(m + 1) * im2.size[1] + n] += nError * 7 / 48.0
+                pix[(m + 1) * im2.size[1] + n + 1] += nError * 5 / 48.0
+                pix[(m + 1) * im2.size[1] + n + 2] += nError * 3 / 48.0
+                pix[(m + 2) * im2.size[1] + n - 2] += nError * 1 / 48.0
+                pix[(m + 2) * im2.size[1] + n - 1] += nError * 3 / 48.0
+                pix[(m + 2) * im2.size[1] + n] += nError * 5 / 48.0
+                pix[(m + 2) * im2.size[1] + n + 1] += nError * 3 / 48.0
+                pix[(m + 2) * im2.size[1] + n + 2] += nError * 1 / 48.0
 
         im2.save("Jarris_Judice_Ninke.bmp")
         qim = ImageQt(im2)
@@ -394,30 +393,30 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im2 = Image.new("1", (im.size[0] * time, im.size[1] * time))
         pix = [0.0] * im2.size[0] * im2.size[1]
 
-        for m in range(im2.size[1]):
-            for n in range(im2.size[0]):
-                pix[m * im2.size[0] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
+        for m in range(im2.size[0]):
+            for n in range(im2.size[1]):
+                pix[m * im2.size[1] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
 
-        for m in range(im2.size[1] - 2):
-            for n in range(2, im2.size[0] - 2):
-                if pix[m * im2.size[0] + n] <= 72:
-                    nError = pix[m * im2.size[0] + n]
+        for m in range(im2.size[0] - 2):
+            for n in range(2, im2.size[1] - 2):
+                if pix[m * im2.size[1] + n] <= 72:
+                    nError = pix[m * im2.size[1] + n]
                     im2.putpixel((m, n), 0)
                 else:
-                    nError = pix[m * im2.size[0] + n] - N
+                    nError = pix[m * im2.size[1] + n] - N
                     im2.putpixel((m, n), 1)
-                pix[m * im2.size[0] + n + 1] += nError * 8 / 42.0
-                pix[m * im2.size[0] + n + 2] += nError * 4 / 42.0
-                pix[(m + 1) * im2.size[0] + n - 2] += nError * 2 / 42.0
-                pix[(m + 1) * im2.size[0] + n - 1] += nError * 4 / 42.0
-                pix[(m + 1) * im2.size[0] + n] += nError * 8 / 42.0
-                pix[(m + 1) * im2.size[0] + n + 1] += nError * 4 / 42.0
-                pix[(m + 1) * im2.size[0] + n + 2] += nError * 2 / 42.0
-                pix[(m + 2) * im2.size[0] + n - 2] += nError * 1 / 42.0
-                pix[(m + 2) * im2.size[0] + n - 1] += nError * 2 / 42.0
-                pix[(m + 2) * im2.size[0] + n] += nError * 4 / 42.0
-                pix[(m + 2) * im2.size[0] + n + 1] += nError * 2 / 42.0
-                pix[(m + 2) * im2.size[0] + n + 2] += nError * 1 / 42.0
+                pix[m * im2.size[1] + n + 1] += nError * 8 / 42.0
+                pix[m * im2.size[1] + n + 2] += nError * 4 / 42.0
+                pix[(m + 1) * im2.size[1] + n - 2] += nError * 2 / 42.0
+                pix[(m + 1) * im2.size[1] + n - 1] += nError * 4 / 42.0
+                pix[(m + 1) * im2.size[1] + n] += nError * 8 / 42.0
+                pix[(m + 1) * im2.size[1] + n + 1] += nError * 4 / 42.0
+                pix[(m + 1) * im2.size[1] + n + 2] += nError * 2 / 42.0
+                pix[(m + 2) * im2.size[1] + n - 2] += nError * 1 / 42.0
+                pix[(m + 2) * im2.size[1] + n - 1] += nError * 2 / 42.0
+                pix[(m + 2) * im2.size[1] + n] += nError * 4 / 42.0
+                pix[(m + 2) * im2.size[1] + n + 1] += nError * 2 / 42.0
+                pix[(m + 2) * im2.size[1] + n + 2] += nError * 1 / 42.0
 
         im2.save("Stucki.bmp")
         qim = ImageQt(im2)
@@ -436,25 +435,25 @@ class mywindow(QtWidgets.QWidget, Ui_MainWindow):
         im2 = Image.new("L", (im.size[0] * time, im.size[1] * time))
         pix = [0.0] * im2.size[0] * im2.size[1]
 
-        for m in range(im2.size[1]):
-            for n in range(im2.size[0]):
-                pix[m * im2.size[0] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
+        for m in range(im2.size[0]):
+            for n in range(im2.size[1]):
+                pix[m * im2.size[1] + n] = im.getpixel((m / time, n / time)) * N / 255.0 + 0.5
 
-        for m in range(1, im2.size[1] - 1):
-            for n in range(1, im2.size[0] - 1):
-                if pix[m * im2.size[0] + n] <= N / M:
-                    nError = pix[m * im2.size[0] + n]
+        for m in range(1, im2.size[0] - 1):
+            for n in range(1, im2.size[1] - 1):
+                if pix[m * im2.size[1] + n] <= N / M:
+                    nError = pix[m * im2.size[1] + n]
                     im2.putpixel((m, n), 0)
-                elif pix[m * im2.size[0] + n] <= 3 * N / M:
-                    nError = pix[m * im2.size[0] + n] - 2 * N / M
+                elif pix[m * im2.size[1] + n] <= 3 * N / M:
+                    nError = pix[m * im2.size[1] + n] - 2 * N / M
                     im2.putpixel((m, n), 255 // R)
                 else:
-                    nError = pix[m * im2.size[0] + n] - 144
+                    nError = pix[m * im2.size[1] + n] - 144
                     im2.putpixel((m, n), 255)
-                pix[m * im2.size[0] + n + 1] += nError * 7 / 16.0
-                pix[(m + 1) * im2.size[0] + n - 1] += nError * 3 / 16.0
-                pix[(m + 1) * im2.size[0] + n] += nError * 5 / 16.0
-                pix[(m + 1) * im2.size[0] + n + 1] += nError * 1 / 16.0
+                pix[m * im2.size[1] + n + 1] += nError * 7 / 16.0
+                pix[(m + 1) * im2.size[1] + n - 1] += nError * 3 / 16.0
+                pix[(m + 1) * im2.size[1] + n] += nError * 5 / 16.0
+                pix[(m + 1) * im2.size[1] + n + 1] += nError * 1 / 16.0
 
         im2.save("mutil.bmp")
         qim = ImageQt(im2)
