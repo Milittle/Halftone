@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>483</width>
+    <height>851</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>481</width>
+      <height>821</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="image_source">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="image_change">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>483</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>操作</string>
+    </property>
+    <addaction name="actionOpen"/>
+   </widget>
+   <widget class="QMenu" name="menu_xuanze">
+    <property name="title">
+     <string>有序抖动算法</string>
+    </property>
+    <addaction name="actionBayer"/>
+    <addaction name="actionHalftone"/>
+    <addaction name="actionScrew"/>
+    <addaction name="actionCoarseFatting"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>无序抖动算法</string>
+    </property>
+    <addaction name="action_global"/>
+    <addaction name="action_local"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>误差扩散算法</string>
+    </property>
+    <addaction name="actionFloydSteinberg"/>
+    <addaction name="actionFloydSteinberg1"/>
+    <addaction name="actionBurkes"/>
+    <addaction name="actionJarrisJudiceNinke"/>
+    <addaction name="actionStucki"/>
+    <addaction name="action_mutil"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_xuanze"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
+  </widget>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionBayer">
+   <property name="text">
+    <string>Bayer抖动算法</string>
+   </property>
+  </action>
+  <action name="actionHalftone">
+   <property name="text">
+    <string>Halftone抖动算法</string>
+   </property>
+  </action>
+  <action name="actionScrew">
+   <property name="text">
+    <string>Screw抖动算法</string>
+   </property>
+  </action>
+  <action name="actionCoarseFatting">
+   <property name="text">
+    <string>CoarseFatting抖动算法</string>
+   </property>
+  </action>
+  <action name="action_global">
+   <property name="text">
+    <string>全局伪随机抖动算法</string>
+   </property>
+  </action>
+  <action name="action_local">
+   <property name="text">
+    <string>局部伪随机抖动算法</string>
+   </property>
+  </action>
+  <action name="actionFloydSteinberg">
+   <property name="text">
+    <string>Floyd-Steinberg算法</string>
+   </property>
+  </action>
+  <action name="actionFloydSteinberg1">
+   <property name="text">
+    <string>蛇形Floyd-Steinberg算法</string>
+   </property>
+  </action>
+  <action name="actionBurkes">
+   <property name="text">
+    <string>Burkes算法</string>
+   </property>
+  </action>
+  <action name="actionJarrisJudiceNinke">
+   <property name="text">
+    <string>Jarris-Judice-Ninke算法</string>
+   </property>
+  </action>
+  <action name="actionStucki">
+   <property name="text">
+    <string>Stucki算法</string>
+   </property>
+  </action>
+  <action name="action_mutil">
+   <property name="text">
+    <string>多位误差扩散算法</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>openimage()</slot>
+ </slots>
+</ui>
